@@ -1,0 +1,10 @@
+
+# Environnment
+venv
+
+# Test data
+drone_videos
+
+# Cache
+__pycache__
+.DS_Store
