@@ -1,4 +1,7 @@
 import socket
+import pickle
+import time
+
 import cv2
 import sys
 
@@ -35,12 +38,29 @@ def video_capture(client_conn, vid_source=None):
         if frame is not None:
             cv2.imshow('Client Video', frame)
 
+        data = client_conn.recv(SOCKET_TRANSMISSION_SIZE).decode(IMAGE_ENCODE_DECODE_FORMAT)
+
+        if data == "NEXT_FRAME":
+            print("Requested next frame")
+            pass
+        elif data == "LOCATION_COORDINATES":
+            print("Requested location coordinates")
+            location_coordinates = get_location()
+            location_data = pickle.dumps(location_coordinates)
+            client_conn.sendall(location_data)
+            print("Requested location coordinates sent")
+            time.sleep(15)
+            break
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
     client_conn.close()
     cv2.destroyAllWindows()
+
+def get_location():
+    return [-2.521287, 54.040087]
 
 
 def init_client():
