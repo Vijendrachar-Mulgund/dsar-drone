@@ -60,7 +60,7 @@ def video_capture(client_conn, vid_source=None):
     cv2.destroyAllWindows()
 
 def get_location():
-    return [-2.521287, 54.040087]
+    return [-3.937610, 52.644903]
 
 
 def init_client():
