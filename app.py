@@ -12,14 +12,6 @@ from config import (SERVER_ADDRESS, IMAGE_ENCODE_DECODE_FORMAT, SOCKET_TRANSMISS
 def video_capture(client_conn, vid_source=None):
     cap = cv2.VideoCapture(vid_source if vid_source is not None else VIDEO_SOURCE)
 
-    # Get resolution
-    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
-    # Send resolution to client
-    resolution = f"{width},{height}"
-    client_conn.send(resolution.encode())
-
     while cap.isOpened():
         ret, frame = cap.read()
 
