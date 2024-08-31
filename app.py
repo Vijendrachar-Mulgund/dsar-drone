@@ -41,8 +41,6 @@ def video_capture(client_conn, vid_source=None):
             location_data = pickle.dumps(location_coordinates)
             client_conn.sendall(location_data)
             print("Requested location coordinates sent")
-            time.sleep(15)
-            break
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
